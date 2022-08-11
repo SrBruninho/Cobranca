@@ -1,0 +1,82 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>Cadastro de título</title>
+		<link rel = "stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
+		<link rel = "stylesheet" type="text/css" href="/css/style.css"/>
+	</head>
+	<body>
+		<nav class="navbar bg-light">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="#">
+				<img src="/images/gora_lion_logo.png" alt="Gora" width="80" height="70" class="d-inline-block align-text-top">
+      			Gora V1.0
+      			</a>
+  			</div>
+		</nav>
+		<div class="card" style="width: 50rem;">
+		 <div class="card-header">
+		    <h5 >Novo título</h5>		    
+		   </div> 
+		    <div class="card-body">
+		    	
+		    	<div class ="container"> 
+		    		<div class ="row"> 
+		    			<div class ="col-sm-2"> 
+		    				<label for="descricao" >Descrição</label>		
+		    			</div>	    		
+			    		<div class ="col-sm-4"> 
+			    			<input type="text" class = "form-control" id="descricao"/>
+			    		</div>
+		    		</div>
+		    	</div>				
+		    	<br>
+		    	<div class ="container"> 
+		    		<div class ="row"> 
+		    			<div class ="col-sm-2"> 
+		    			<label for="dataVencimento">Data de Vencimento</label>
+		    			</div>	    		
+			    		<div class ="col-sm-4"> 
+		    				<input type="text" placeholder="dd/MM/yyyy" class = "form-control" id="dataVencimento"/>
+			    		</div>
+		    		</div>
+		    	</div>
+		    	<br>
+		    	<div class ="container"> 
+		    		<div class ="row"> 
+		    			<div class ="col-sm-2"> 
+		    				<label for="valor">Valor</label>
+		    			</div>	    		
+			    		<div class ="col-sm-4"> 
+		    				<input type="text" class = "form-control" id="valor"/>
+			    		</div>
+		    		</div>
+		    	</div>
+		    	<br>
+		    	<div class ="container"> 
+		    		<div class ="row"> 
+		    			<div class ="col-sm-2"> 
+		    				<label for="status">Status</label>
+		    			</div>	    		
+			    		<div class ="col-sm-4"> 
+							<select class="form-control">
+		    					<option>Pendente</option>
+		    					<option>Recebido</option>
+		    				</select>	
+		    			</div>
+		    		</div>
+		    	</div>		
+		    	<br>   	    	
+		    	<div class ="container"> 
+		    		<div class ="row"> 
+		    			<div class ="col-sm-4 offset-md-2"> 
+		    				<button type="submit" class="btn btn-primary">Salvar</button>
+			    		</div>
+		    		</div>
+		    	</div>
+		    
+   		    	
+		    </div>
+		</div>
+		<script src="/js/bootstrap.min.js"></script>
+	</body>
+</html>
