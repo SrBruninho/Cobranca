@@ -17,7 +17,7 @@ import com.gora.cobranca.repository.TituloRepository;
 
 @Controller
 @RequestMapping("/titulos")
-public class CadastroTituloController {
+public class TituloController {
 	
 	@Autowired
 	private TituloRepository tituloRepository;
@@ -38,8 +38,11 @@ public class CadastroTituloController {
 	}
 
 	@GetMapping
-	public String pesquisar() {
-		return "PesquisaTitulo";
+	public ModelAndView pesquisar() {
+		List<Titulo> listTitulos = tituloRepository.findAll();
+		ModelAndView modelView = new ModelAndView( "PesquisaTitulo" );
+		modelView.addObject( "titulos", listTitulos );
+		return modelView;
 	}
 	
 	

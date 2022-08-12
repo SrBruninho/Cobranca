@@ -78,6 +78,10 @@ public class Titulo {
 		this.status = status;
 	}
 	
+	public boolean isPendente() {
+		return StatusTitulo.PENDENTE.equals( this.status );
+	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(codTitulo, dataVencimento, descricao, status, valor);
