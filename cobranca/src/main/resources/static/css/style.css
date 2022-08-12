@@ -12,3 +12,14 @@
 	margin-left: 10px;
 	margin-right: 10px;
 }
+
+.gora-link-panel{
+	float: right;
+	padding: 0px;
+	
+}
+
+.gora-titulo-panel{
+	float: left;
+	padding-top: 2px;
+}
