@@ -63,9 +63,11 @@ xmlns:th="http://www.thymeleaf.org">
 			    				<label for="status">Status</label>
 			    			</div>	    		
 				    		<div class ="col-sm-4"> 
-								<select class="form-control" name="status">
-			    					<option value="PENDENTE">Pendente</option>
-			    					<option value="RECEBIDO">Recebido</option>
+								<select class="form-select" aria-label="Default select example" name="status">
+			    					<option 
+			    					th:each="status : ${todosStatusTitulo}" 
+			    					th:value="${status}"
+			    					th:text="${status.descricao}"></option>
 			    				</select>	
 			    			</div>
 			    		</div>

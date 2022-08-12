@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  db:
+    image: mysql:8.0
+    container_name: TEST_DATABASE
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=gora123
+    ports:
+      - "3309:3306"
