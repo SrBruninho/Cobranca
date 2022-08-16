@@ -1,0 +1,25 @@
+.navbar-brand{
+	padding-top: 12px;
+}
+
+.card{
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-top: 10px;
+}
+
+.alert{
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.gora-link-panel{
+	float: right;
+	margin-left: 10px;
+	
+}
+
+.gora-titulo-panel{
+	float: left;
+	padding-top: 2px;
+}
