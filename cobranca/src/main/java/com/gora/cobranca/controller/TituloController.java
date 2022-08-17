@@ -5,8 +5,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -26,13 +29,18 @@ public class TituloController {
 	public ModelAndView novo() {
 		ModelAndView modelView = new ModelAndView( "CadastroTitulo" );
 		modelView.addObject( "todosStatusTitulo", StatusTitulo.values() );
+		modelView.addObject( new Titulo() );
 		return modelView;
 	}
 	
-	@RequestMapping(method = RequestMethod.POST )
-	public ModelAndView salvar( Titulo titulo ) {
-		tituloRepository.save( titulo );
+	@PostMapping
+	public ModelAndView salvar(@Validated Titulo titulo, Errors errors ) {
 		ModelAndView modelView = new ModelAndView( "CadastroTitulo" );
+
+		if( errors.hasErrors() )
+			return modelView;
+		
+		tituloRepository.save( titulo );
 		modelView.addObject("mensagem","Título salvo com sucesso!");
 		return modelView;
 	}

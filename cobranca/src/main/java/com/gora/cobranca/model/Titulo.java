@@ -12,12 +12,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
-import org.springframework.lang.NonNull;
-import org.springframework.lang.NonNullFields;
-import org.springframework.lang.Nullable;
 
 
 @Entity
@@ -27,13 +28,18 @@ public class Titulo {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codTitulo;
 	
+	@NotEmpty(message = "Descrição obrigatória")
+	@Size(max=60, message = "A descrição não ode conter mais de 60 caracteres")
 	private String descricao;
 	
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@NotNull(message="Data de vencimento é obrigatória")
 	private Date dataVencimento;
 	
 	@NumberFormat(pattern="#,##0.00")
+	@NotNull( message = "Valor é obrigatória" )
+	@DecimalMin( value = "0.01", message="Valor não pode ser menor que 0,01")
 	private BigDecimal valor;
 	
 	@Enumerated(EnumType.STRING)
