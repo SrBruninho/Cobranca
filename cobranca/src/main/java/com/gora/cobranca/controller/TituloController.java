@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.gora.cobranca.model.StatusTitulo;
 import com.gora.cobranca.model.Titulo;
@@ -34,15 +35,13 @@ public class TituloController {
 	}
 	
 	@PostMapping
-	public ModelAndView salvar(@Validated Titulo titulo, Errors errors ) {
-		ModelAndView modelView = new ModelAndView( "CadastroTitulo" );
-
+	public String salvar(@Validated Titulo titulo, Errors errors, RedirectAttributes redAttributes ) {
 		if( errors.hasErrors() )
-			return modelView;
+			return "CadastroTitulo";
 		
 		tituloRepository.save( titulo );
-		modelView.addObject("mensagem","Título salvo com sucesso!");
-		return modelView;
+		redAttributes.addFlashAttribute("mensagem","Título salvo com sucesso!");
+		return "redirect:/titulos/novo";
 	}
 
 	@GetMapping
