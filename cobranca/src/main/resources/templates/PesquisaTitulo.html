@@ -5,11 +5,14 @@
 	layout:decorate="~{LayoutDefault}">
 	
 	<section layout:fragment="conteudo">
-
+		<div class="alert alert-success" th:if="${!#strings.isEmpty(mensagem)}">
+			<span th:text="${mensagem}"/>
+		</div>
 		<div class="card" >
 			<div class="card-header">
 				<h5 class="panel-title gora-titulo-panel">Pesquisa título</h5>	
 			</div> 
+				
 			<div class="card-body">
 				<table class="table table-bordered table-striped">
 					<thead>
@@ -19,7 +22,7 @@
 				    		<th class="text-center col-md-2">Data de Vencimento</th>
 				    		<th class="text-center col-md-2">Valor</th>
 				    		<th class="text-center col-md-2">Status</th>
-				    		<th class="text-center col-md-1">#</th>
+				    		<th class="text-center col-md-1">Ações</th>
 				    	</tr>
 				    </thead>
 				    <tbody>
@@ -32,16 +35,24 @@
 				    		<span class="badge" th:text="${titulo.status.descricao}" 
 				    		th:classappend="${titulo.pendente ? 'bg-danger' : 'bg-success'}"></span>	
 				    	</td>
-				    	<td class="text-center"></td>
+				    	<td class="text-center">
+				    		<a class="btn btn-link btn-xs" th:href="@{/titulos/{codigo}(codigo=${titulo.codTitulo})}">
+				    			<span>ed</span>
+				    		<a class="btn btn-link btn-xs" data-bs-toggle="modal" 
+				    			href="#confExclusaoTitulo" data-bs-target="#confExclusaoTitulo"
+				    			th:attr="data-codigo=${titulo.codTitulo}"
+				    			th:attrappend="data-descricao=${titulo.descricao}">
+				    			<span>ex</span>
+				    		</a>
+				    	</td>
 				    </tr>
 				    <tr>
 				    	<td colspan = "6" th:if="${#lists.isEmpty(titulos)}"> Sem dados para retornar !</td>
 				    </tr>
 				   	</tbody>
 				</table>			    
-		    </div> 
+		    </div>
+		    	<div th:replace="DialogoConfExclusao"></div>
 		</div> 		
-		<script src="/js/jquery-3.6.0.min.js"></script>
-		<script src="/js/bootstrap.min.js"></script>
 	</section>
 </html>
