@@ -22,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.gora.cobranca.model.StatusTitulo;
 import com.gora.cobranca.model.Titulo;
 import com.gora.cobranca.repository.TituloRepository;
+import com.gora.cobranca.service.TituloService;
 
 @Controller
 @RequestMapping("/titulos")
@@ -35,6 +36,9 @@ public class TituloController {
 	
 	@Autowired
 	private TituloRepository tituloRepository;
+	
+	@Autowired
+	private TituloService tituloService;
 	
 	@RequestMapping("/novo")
 	public ModelAndView novo() {
@@ -50,10 +54,10 @@ public class TituloController {
 			return CADASTRO_VIEW;
 		
 		try {
-				tituloRepository.save( titulo );
-				redAttributes.addFlashAttribute("mensagem","Título salvo com sucesso!");
-		} catch( DataIntegrityViolationException ex ) {
-			errors.rejectValue("dataVencimento",null, "Formato inválido de data");
+			tituloService.salvar( titulo );
+			redAttributes.addFlashAttribute( "mensagem","Título salvo com sucesso!" );
+		} catch( IllegalArgumentException ex ) {			
+			errors.rejectValue( "dataVencimento",null, ex.getMessage() );
 			return CADASTRO_VIEW;
 		}
 
@@ -69,16 +73,15 @@ public class TituloController {
 	
 	@DeleteMapping("{codigo}")
 	public String deletar(@PathVariable Long codigo, RedirectAttributes redAttributes) {
-		tituloRepository.deleteById( codigo );
+		tituloService.excluir( codigo );
 		redAttributes.addFlashAttribute("mensagem","Título excluído com sucesso!");
 		return REDIRECT_PESQUISA_VIEW;
 	}
 	
 	@GetMapping
 	public ModelAndView pesquisar() {
-		List<Titulo> listTitulos = tituloRepository.findAll();
 		ModelAndView modelView = new ModelAndView( PESQUISA_VIEW );
-		modelView.addObject( "titulos", listTitulos );
+		modelView.addObject( "titulos", tituloService.listarTitulos() );
 		return modelView;
 	}	
 	
