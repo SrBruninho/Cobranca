@@ -5,23 +5,26 @@
 	layout:decorate="LayoutDefault">
 	
 	<section layout:fragment="conteudo">	
-		<form method="POST" action="/titulos">
-				<div class="alert alert-success" th:if="${!#strings.isEmpty(mensagem)}">
-					<span th:text="${mensagem}"/>
-				</div>
+		<form method="POST" action="/titulos" th:object="${titulo}" >
+				
+				<div layout:include="Mensagem"></div>
+				
 				<div class="card" style="width: 50rem;">
 				 <div class="card-header">	
 				    <h5 class="panel-title gora-titulo-panel">Novo título</h5>	
 				   </div> 
 				    <div class="card-body">
-				    	
+				    	<input type="hidden" th:field="*{codTitulo}"/>
 				    	<div class ="container"> 
 				    		<div class ="row"> 
 				    			<div class ="col-sm-2"> 
 				    				<label for="descricao" >Descrição</label>		
 				    			</div>	    		
 					    		<div class ="col-sm-4"> 
-					    			<input type="text" class = "form-control" id="descricao" name="descricao"/>
+					    			<input type="text" class = "form-control" id="descricao" 
+					    			th:field="*{descricao}"
+					    			
+					    			th:classappend="${#fields.hasErrors('descricao')} ? is-invalid"/>
 					    		</div>
 				    		</div>
 				    	</div>				
@@ -32,7 +35,13 @@
 				    			<label for="dataVencimento">Data de Vencimento</label>
 				    			</div>	    		
 					    		<div class ="col-sm-4"> 
-				    				<input type="text" class = "form-control" id="dataVencimento" name="dataVencimento"/>
+				    				<input type="text" 
+				    				class = "form-control" 
+				    				data-provide="datepicker" data-date-format="dd/mm/yyyy"
+				    				data-date-language="pt-BR" data-date-autoclose="true"
+				    				data-date-today-highline="true" data-date-orientation="bottom"
+				    				id="dataVencimento" th:field="*{dataVencimento}"
+				    				th:classappend="${#fields.hasErrors('dataVencimento')} ? is-invalid"/>
 					    		</div>
 				    		</div>
 				    	</div>
@@ -43,7 +52,8 @@
 				    				<label for="valor">Valor</label>
 				    			</div>	    		
 					    		<div class ="col-sm-4"> 
-				    				<input type="text" class = "form-control" id="valor" name="valor"/>
+				    				<input type="text" class = "form-control js-currency" id="valor" th:field="*{valor}"
+				    				th:classappend="${#fields.hasErrors('valor')} ? is-invalid"/>
 					    		</div>
 				    		</div>
 				    	</div>
@@ -57,7 +67,7 @@
 									<select class="form-select" aria-label="Default select example" name="status">
 				    					<option 
 				    					th:each="status : ${todosStatusTitulo}" 
-				    					th:value="${status}"
+				    					th:value="${status}" th:field="*{status}"
 				    					th:text="${status.descricao}"></option>
 				    				</select>	
 				    			</div>
