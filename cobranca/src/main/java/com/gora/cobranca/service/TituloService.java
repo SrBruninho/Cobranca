@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.gora.cobranca.model.StatusTitulo;
 import com.gora.cobranca.model.Titulo;
 import com.gora.cobranca.repository.TituloRepository;
+import com.gora.cobranca.repository.filter.TituloFilter;
 
 @Service
 public class TituloService {
@@ -40,5 +41,10 @@ public class TituloService {
 		tituloRepository.save( titulo );
 		
 		return StatusTitulo.RECEBIDO.getDescricao();
+	}
+
+	public List<Titulo> filtrarTitulo(TituloFilter filtro) {
+		String descricao = filtro.descricaoValida();
+		return tituloRepository.findByDescricaoContaining( descricao );
 	}
 }
