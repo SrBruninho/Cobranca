@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -83,7 +85,13 @@ public class TituloController {
 		ModelAndView modelView = new ModelAndView( PESQUISA_VIEW );
 		modelView.addObject( "titulos", tituloService.listarTitulos() );
 		return modelView;
-	}	
+	}
+	
+	@PutMapping("/{codigo}/receber")
+	public @ResponseBody String receber( @PathVariable Long codigo ) {
+			
+		return tituloService.receber( codigo );
+	}
 	
 	@ModelAttribute("todosStatusTitulo")
 	public List<StatusTitulo> retornaStatusTitulo(){

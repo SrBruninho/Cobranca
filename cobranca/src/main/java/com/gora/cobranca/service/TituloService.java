@@ -1,11 +1,13 @@
 package com.gora.cobranca.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import com.gora.cobranca.model.StatusTitulo;
 import com.gora.cobranca.model.Titulo;
 import com.gora.cobranca.repository.TituloRepository;
 
@@ -30,5 +32,13 @@ public class TituloService {
 
 	public List<Titulo> listarTitulos() {
 		return tituloRepository.findAll();
+	}
+	
+	public String receber( Long codigo) {
+		Titulo titulo = tituloRepository.getById( codigo );
+		titulo.setStatus( StatusTitulo.RECEBIDO );
+		tituloRepository.save( titulo );
+		
+		return StatusTitulo.RECEBIDO.getDescricao();
 	}
 }

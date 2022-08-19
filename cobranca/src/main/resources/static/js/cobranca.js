@@ -17,7 +17,26 @@ $('#confExclusaoTitulo').on('show.bs.modal', function(event) {
 
 $(function(){
 	$('.js-currency').maskMoney({decimal:',',thousands: '.',allowZero: true});
-});
-
- 
- 
+	$('.js-atualizar-status').on('click', function( event ){
+		event.preventDefault()
+		
+		var botaoReceber = $(event.currentTarget);
+		var urlReceber = botaoReceber.attr('href');
+		
+		var response = $.ajax({
+			url: urlReceber, 
+			type: 'PUT'
+		});
+		
+		response.done(function( e ){
+			var codTitulo = botaoReceber.data('codigo');
+			$('[data-role=' + codTitulo +']').html('<span class="badge bg-success">'+ e +'</span>');
+			botaoReceber.hide();
+		});
+		
+		response.fail(function( e ){
+			console.log( e );
+			alert('Erro ao receber');
+		});		
+ 	});
+}); 

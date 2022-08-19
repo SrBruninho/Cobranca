@@ -31,20 +31,27 @@
 				    	<td th:text="${titulo.descricao}"></td>
 				    	<td class="text-center" th:text="${{titulo.dataVencimento}}"></td>
 				    	<td class="text-right" th:text="${{titulo.valor}}"></td>
-				    	<td class="text-center">
+				    	<td class="text-center"th:attr="data-role=${titulo.codTitulo}">
 				    		<span class="badge" th:text="${titulo.status.descricao}" 
-				    		th:classappend="${titulo.pendente ? 'bg-danger' : 'bg-success'}"></span>	
+				    		th:classappend="${titulo.pendente ? 'bg-danger' : 'bg-success'}"
+				    		></span>	
 				    	</td>
 				    	<td class="text-center">
 				    		<a class="btn btn-link btn-xs" th:href="@{/titulos/{codigo}(codigo=${titulo.codTitulo})}"
 				    			title="Editar">
 				    			<span>ed</span>
+				    		</a>
 				    		<a class="btn btn-link btn-xs" data-bs-toggle="modal" 
 				    			href="#confExclusaoTitulo" data-bs-target="#confExclusaoTitulo"
 				    			th:attr="data-codigo=${titulo.codTitulo}"
 				    			th:attrappend="data-descricao=${titulo.descricao}"
 				    			title="Excluir">
 				    			<span>ex</span>
+				    		</a>
+				    		<a class="btn btn-link btn-xs js-atualizar-status"
+				    			th:if="${titulo.pendente}" th:attr="data-codigo=${titulo.codTitulo}" th:href="@{/titulos/{codigo}/receber(codigo=${titulo.codTitulo})}"
+				    			title="Receber">
+				    			<span>r</span>
 				    		</a>
 				    	</td>
 				    </tr>
