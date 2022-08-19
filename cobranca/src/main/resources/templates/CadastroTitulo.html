@@ -67,7 +67,7 @@
 									<select class="form-select" aria-label="Default select example" name="status">
 				    					<option 
 				    					th:each="status : ${todosStatusTitulo}" 
-				    					th:value="${status}"
+				    					th:value="${status}" th:field="*{status}"
 				    					th:text="${status.descricao}"></option>
 				    				</select>	
 				    			</div>
