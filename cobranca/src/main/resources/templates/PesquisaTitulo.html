@@ -36,12 +36,14 @@
 				    		th:classappend="${titulo.pendente ? 'bg-danger' : 'bg-success'}"></span>	
 				    	</td>
 				    	<td class="text-center">
-				    		<a class="btn btn-link btn-xs" th:href="@{/titulos/{codigo}(codigo=${titulo.codTitulo})}">
+				    		<a class="btn btn-link btn-xs" th:href="@{/titulos/{codigo}(codigo=${titulo.codTitulo})}"
+				    			title="Editar">
 				    			<span>ed</span>
 				    		<a class="btn btn-link btn-xs" data-bs-toggle="modal" 
 				    			href="#confExclusaoTitulo" data-bs-target="#confExclusaoTitulo"
 				    			th:attr="data-codigo=${titulo.codTitulo}"
-				    			th:attrappend="data-descricao=${titulo.descricao}">
+				    			th:attrappend="data-descricao=${titulo.descricao}"
+				    			title="Excluir">
 				    			<span>ex</span>
 				    		</a>
 				    	</td>
