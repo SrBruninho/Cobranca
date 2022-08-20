@@ -45,6 +45,19 @@ public class Titulo {
 	@Enumerated(EnumType.STRING)
 	private StatusTitulo status;	
 	
+	public Titulo(Long codTitulo, String descricao,Date dataVencimento,
+			BigDecimal valor, StatusTitulo status) {
+		
+		this.codTitulo = codTitulo;
+		this.descricao = descricao;
+		this.dataVencimento = dataVencimento;
+		this.valor = valor;
+		this.status = status;
+	}
+	
+	public Titulo() {		
+	}
+	
 	public Long getCodTitulo() {
 		return codTitulo;
 	}
